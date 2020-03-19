@@ -1,4 +1,4 @@
-const stackFactory = () => {
+const stackFactory = (capacity = 2) => {
   //let empty = true;
   //let count = 0;
   if (capacity < 1) throw new Error('invalid capacity');
