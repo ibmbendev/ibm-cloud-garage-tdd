@@ -1,8 +1,6 @@
 const stackFactory = () => {
   let empty = true;
   let count = 0;
-
-
   return {
     isEmpty: () => empty,
     size: () => count,
