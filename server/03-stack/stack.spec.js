@@ -8,12 +8,15 @@ const stackFactory = () => {
       empty = false;
       count += 1;
     },
-    pop: () => {  empty = true; }
+    pop: () => {  
+      empty = true;
+      count -= 1;
+    }
   }
 };
 
 
-let stack = stackFactory();
+let stack;
 
 
 describe('the stack canary spec', () => {
@@ -23,6 +26,11 @@ describe('the stack canary spec', () => {
 });
 
 describe('a stack', () => {
+  beforeEach(() => {
+    stack = stackFactory();
+
+  });
+
   it('starts empty', () => {
     expect(stack.isEmpty()).toBe(true);
   });
@@ -33,7 +41,10 @@ describe('a stack', () => {
     stack.push();
     expect(stack.isEmpty()).toBe(false);
   });
-  it.todo('stack size is 1 when pushed');
+  it('stack size is 1 when pushed', () => {
+    stack.push();
+    expect(stack.size()).toBe(1);
+  });
   it('stack is empty when pushed and popped', () => {
     stack.push();
     stack.pop();
