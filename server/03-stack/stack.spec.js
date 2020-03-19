@@ -2,14 +2,17 @@ const stackFactory = () => {
   let empty = true;
   let count = 0;
   return {
-    isEmpty: () => empty,
+    isEmpty: () => count === 0,
     size: () => count,
     push: () => {
-      empty = false;
+      //empty = false;
+      if (count === 2) throw new Error('capacity overflow error');
+
       count += 1;
     },
     pop: () => {  
       empty = true;
+      if (count === 0) throw new Error('capacity underflow error')
       count -= 1;
     }
   }
@@ -55,8 +58,18 @@ describe('a stack', () => {
     stack.pop();
     expect(stack.size()).toBe(0);
   });
-  it.todo('throws overflow error when pushing to a stack at full capacity');
-  it.todo('throw underflow error when popping an empty stack');
+  it('throws overflow error when pushing to a stack at full capacity', () => {
+    stack.push();
+    stack.push();
+    expect(() => {
+      stack.push();
+    }).toThrowError('capacity overflow error');
+  });
+  it('throw underflow error when popping an empty stack', () => {
+    expect(() => {
+      stack.pop();
+    }).toThrowError('capacity underflow error');
+  });
   it.todo('pops the same one item when pushed');
   it.todo('pops two items with the most recent first');
   it.todo('accepts only a positive capacity');
